@@ -1,0 +1,45 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.frameworkdesign'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation("org.seleniumhq.selenium:selenium-java:4.41.0")
+    implementation("org.testng:testng:7.12.0")
+    implementation("commons-io:commons-io:2.21.0")
+    implementation("com.aventstack:extentreports:5.1.2")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.21.1")
+    implementation("io.rest-assured:rest-assured:6.0.0")
+    implementation("io.cucumber:cucumber-java:7.34.3")
+    implementation("io.cucumber:cucumber-testng:7.34.3")
+}
+
+test {
+    useTestNG {
+        useDefaultListeners = true
+        outputDirectory = file("$buildDir/test-output")
+
+        systemProperty "browser", System.getProperty("browser")
+        parallel System.getProperty("parallel", "methods").toString()
+        threadCount System.getProperty("threads", "1").toInteger()
+        if (System.getProperty("includeGroups") != null) {
+            includeGroups System.getProperty("includeGroups").toString()
+        }
+        if (System.getProperty("excludeGroups") != null) {
+            excludeGroups System.getProperty("excludeGroups").toString()
+        }
+
+        options {
+            setSuiteName System.getProperty("suiteName", "Ashish - Automation Framework Design")
+        }
+
+        listeners << "com.frameworkdesign.ui.utility.FrameworkListeners"
+        listeners << "com.frameworkdesign.ui.utility.RetryTransformer"
+    }
+}
