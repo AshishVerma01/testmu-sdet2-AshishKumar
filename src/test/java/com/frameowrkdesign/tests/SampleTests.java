@@ -20,5 +20,5 @@ public class SampleTests extends BaseActions {
         Actions actions = new Actions(driver);
     }
 
-    //To test CI/CD
+    //To test CI/CD pipeline
 }
