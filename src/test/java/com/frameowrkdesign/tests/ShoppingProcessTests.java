@@ -12,6 +12,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -24,8 +25,8 @@ public class ShoppingProcessTests extends BaseActions {
     OrdersPageActions ordersPageActions;
 
     @BeforeMethod(alwaysRun = true)
-    public void goToPage() throws IOException {
-        initiateDriver(PAGE_URL);
+    public void goToPage() throws IOException, URISyntaxException {
+        initiateDriver(PAGE_URL, runType);
         homePageActions = new HomePageActions(getDriver(), getWait());
         cartPageActions = new CartPageActions(getDriver(), getWait());
         finalCheckoutPage = new FinalCheckoutPageActions(getDriver(), getWait());

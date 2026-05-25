@@ -18,6 +18,8 @@ dependencies {
     implementation("io.rest-assured:rest-assured:6.0.0")
     implementation("io.cucumber:cucumber-java:7.34.3")
     implementation("io.cucumber:cucumber-testng:7.34.3")
+    implementation("org.apache.poi:poi-ooxml:5.5.1")
+    implementation("org.apache.poi:poi:5.5.1")
 }
 
 test {
@@ -26,6 +28,7 @@ test {
         outputDirectory = file("$buildDir/test-output")
 
         systemProperty "browser", System.getProperty("browser")
+        systemProperty "runType", System.getProperty("runType")
         parallel System.getProperty("parallel", "methods").toString()
         threadCount System.getProperty("threads", "1").toInteger()
         if (System.getProperty("includeGroups") != null) {
